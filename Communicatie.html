@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <style>
+        /* Navigatie en dropdown menu zonder winkelwagentje */
+nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  background-color: #333;
+  font-family: 'Playfair Display', serif;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: #444;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #444;
+  top: 100%;
+  left: 0;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f39c12;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Communicatie | Gebroeders Paridaans</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Communicatie</h1>
+            <nav>
+              <div class="dropdown">
+                <div class="dropdown-button">Menu</div>
+                <div class="dropdown-content">
+                  <a href="index.html">Home</a>
+                  <a href="communicatie.html">Communicatie</a>
+                  <a href="over-ons.html">Over ons</a>
+                </div>
+              </div>
+            </nav>
+  </header>
+
+  <main>
+    <section style="max-width: 800px; margin: 2rem auto; background: #fff; padding: 1rem; border-radius: 8px;">
+      <h2>Neem contact op met Gebroeders Paridaans</h2>
+      <p>Voor vragen, opmerkingen of bestellingen, kunt u hieronder contact met ons opnemen.</p>
+      <form action="#" method="post">
+        <label for="name">Naam:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="message">Bericht:</label><br>
+        <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+        <input type="submit" value="Verstuur">
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Gebroeders Paridaans. Ambachtelijk en met liefde bereid.</p>
+  </footer>
+</body>
+</html>

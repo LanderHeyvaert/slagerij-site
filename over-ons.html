@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Over ons | Gebroeders Paridaans</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    .about-section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff8f0;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      font-family: 'Playfair Display', serif;
+      color: #3b2f2f;
+    }
+    .about-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .about-section p {
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    /* Navigatie en dropdown menu zonder winkelwagentje */
+nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  background-color: #333;
+  font-family: 'Playfair Display', serif;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: #444;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #444;
+  top: 100%;
+  left: 0;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f39c12;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Over ons</h1>
+            <nav>
+              <div class="dropdown">
+                <div class="dropdown-button">Menu</div>
+                <div class="dropdown-content">
+                  <a href="index.html">Home</a>
+                  <a href="communicatie.html">Communicatie</a>
+                  <a href="over-ons.html">Over ons</a>
+                </div>
+              </div>
+            </nav>
+  </header>
+
+  <main>
+    <section class="about-section">
+      <h2>Ambachtelijk vlees sinds 1985</h2>
+      <p>Bij Gebroeders Paridaans draait alles om kwaliteit, vakmanschap en liefde voor het slagersvak. Al sinds 1985 staan wij als familiebedrijf garant voor heerlijk en eerlijk vlees, recht van bij de boer.</p>
+      
+      <p>Wij geloven dat ambachtelijke bereidingen, respect voor dieren en persoonlijke service het verschil maken. Van sappige biefstukken tot zelfgekruide worsten: alles wordt met zorg en passie bereid.</p>
+
+      <p>Kom langs in onze winkel of bestel eenvoudig online. Wij zorgen voor een warme ontvangst en producten van topkwaliteit!</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Gebroeders Paridaans. Ambachtelijk en met liefde bereid.</p>
+  </footer>
+</body>
+</html>

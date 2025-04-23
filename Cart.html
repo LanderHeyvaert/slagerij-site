@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Winkelwagentje | Gebroeders Paridaans</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Winkelwagentje</h1>
+    <nav>
+      <a href="index.html">Terug naar winkel</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="cart-section" style="max-width: 800px; margin: 2rem auto; background: #fff; padding: 1rem; border-radius: 8px;">
+      <div id="cart-items"></div>
+      <p id="cart-total" style="font-weight: bold; margin-top: 1rem;"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Gebroeders Paridaans. Ambachtelijk en met liefde bereid.</p>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Functie om een product volledig uit het winkelwagentje te verwijderen
+    function removeFromCart(productName) {
+      cart = cart.filter(item => item.name !== productName);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart(); // Herlaad het winkelwagentje
+    }
+
+    // Functie om de hoeveelheid van een product met 1 te verminderen
+    function removeOneFromCart(productName) {
+      const item = cart.find(p => p.name === productName);
+      if (item && item.qty > 1) {
+        item.qty -= 1;  // Verminder de hoeveelheid met 1
+      } else {
+        // Als de hoeveelheid 1 is, verwijderen we het product helemaal
+        removeFromCart(productName);
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart(); // Herlaad het winkelwagentje
+    }
+
+    // Functie om het winkelwagentje weer te geven
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      const totalContainer = document.getElementById('cart-total');
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Je winkelwagentje is leeg.</p>';
+        totalContainer.innerText = '';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <strong>${item.name}</strong><br>
+          Aantal: ${item.qty} &times; €${item.price.toFixed(2)} = €${subtotal.toFixed(2)}<br>
+          <button onclick="removeOneFromCart('${item.name}')">Verwijder 1</button>
+          <button onclick="removeFromCart('${item.name}')">Verwijder alles</button>
+          <hr>
+        `;
+        container.appendChild(div);
+      });
+
+      totalContainer.innerText = `Totaal: €${total.toFixed(2)}`;
+    }
+
+    if (document.readyState !== 'loading') {
+      if (document.getElementById('cart-items')) renderCart();
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        if (document.getElementById('cart-items')) renderCart();
+      });
+    }
+  </script>
+</body>
+</html>
