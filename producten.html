@@ -61,6 +61,17 @@
   </style>
 </head>
 <body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background-color: #f1e4dc; border-bottom: 2px solid #7c2f1e;">
+        <h1 style="margin: 0; color: #7c2f1e;">Onze Producten</h1>
+        <div id="cart" style="font-weight: bold; color: #7c2f1e;">
+          🛒 Winkelmandje: <span id="cart-count">0</span> items
+        </div>
+      </header>      
+    <nav style="background-color: #f1e4dc; padding: 1rem; text-align: center;">
+        <a href="index.html" style="margin: 0 1rem; text-decoration: none; color: #7c2f1e; font-weight: bold;">Home</a>
+        <a href="over-ons.html" style="margin: 0 1rem; text-decoration: none; color: #7c2f1e; font-weight: bold;">Over ons</a>
+        <a href="contact.html" style="margin: 0 1rem; text-decoration: none; color: #7c2f1e; font-weight: bold;">Contact</a>
+      </nav>     
   <header>
     <h1>Onze Producten</h1>
   </header>
@@ -91,5 +102,20 @@
       // In de toekomst kun je hier localStorage of een echt winkelwagensysteem koppelen
     }
   </script>
+  <section style="padding: 1rem;">
+    <div style="border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem;">
+      <h2>Ambachtelijke Salami</h2>
+      <p>€4,50 / 200g</p>
+      <button onclick="addToCart()">Voeg toe aan winkelmandje</button>
+    </div>
+  </section>
+  <script>
+    let cartCount = 0;
+  
+    function addToCart() {
+      cartCount++;
+      document.getElementById('cart-count').textContent = cartCount;
+    }
+  </script>    
 </body>
 </html>
