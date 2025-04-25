@@ -1,0 +1,114 @@
+/* Algemene reset en basis */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background-color: #fff8f4;
+    color: #333;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Header en navigatie */
+  header {
+    background-color: #f1e4dc;
+    color: #7c2f1e;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #7c2f1e;
+    flex-wrap: wrap;
+  }
+  
+  nav {
+    background-color: #f1e4dc;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #7c2f1e;
+    margin: 0 1rem;
+    font-weight: bold;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Productlijst */
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  
+  .product {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+  
+  .product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .product h2 {
+    margin: 0.5rem 0;
+  }
+  
+  button {
+    background-color: #7c2f1e;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #a3422b;
+  }
+  
+  /* Winkelmandje */
+  #cart {
+    font-weight: bold;
+    color: #7c2f1e;
+    cursor: pointer;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f1e4dc;
+    color: #7c2f1e;
+    margin-top: 2rem;
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    nav a {
+      display: inline-block;
+      margin: 0.5rem;
+    }
+  }  
