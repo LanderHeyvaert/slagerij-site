@@ -63,59 +63,69 @@
 <body>
     <header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background-color: #f1e4dc; border-bottom: 2px solid #7c2f1e;">
         <h1 style="margin: 0; color: #7c2f1e;">Onze Producten</h1>
+        <!-- Maak het winkelmandje een klikbare link naar cart.html -->
         <div id="cart" style="font-weight: bold; color: #7c2f1e;">
-          🛒 Winkelmandje: <span id="cart-count">0</span> items
+          <a href="cart.html" style="text-decoration: none; color: #7c2f1e;">
+            🛒 Winkelmandje: <span id="cart-count">0</span> items
+          </a>
         </div>
-      </header>      
+    </header>      
     <nav style="background-color: #f1e4dc; padding: 1rem; text-align: center;">
         <a href="index.html" style="margin: 0 1rem; text-decoration: none; color: #7c2f1e; font-weight: bold;">Home</a>
         <a href="over-ons.html" style="margin: 0 1rem; text-decoration: none; color: #7c2f1e; font-weight: bold;">Over ons</a>
         <a href="contact.html" style="margin: 0 1rem; text-decoration: none; color: #7c2f1e; font-weight: bold;">Contact</a>
-      </nav>     
-  <header>
-    <h1>Onze Producten</h1>
-  </header>
+    </nav>     
 
-  <section class="product-list">
-    <div class="product">
-      <img src="https://via.placeholder.com/250x150?text=Biefstuk" alt="Biefstuk">
-      <h2>Biefstuk</h2>
-      <p>€12,99 / kg</p>
-      <button onclick="addToCart('Biefstuk')">Voeg toe aan winkelmandje</button>
-    </div>
-    <div class="product">
-      <img src="https://via.placeholder.com/250x150?text=Gehakt" alt="Gehakt">
-      <h2>Gehakt</h2>
-      <p>€7,49 / kg</p>
-      <button onclick="addToCart('Gehakt')">Voeg toe aan winkelmandje</button>
-    </div>
-    <!-- Voeg hier meer producten toe -->
-  </section>
+    <header>
+        <h1>Onze Producten</h1>
+    </header>
 
-  <footer>
-    <p>&copy; 2025 Slagerij Heyvaert</p>
-  </footer>
+    <section class="product-list">
+        <div class="product">
+            <img src="https://via.placeholder.com/250x150?text=Biefstuk" alt="Biefstuk">
+            <h2>Biefstuk</h2>
+            <p>€12,99 / kg</p>
+            <button onclick="addToCart('Biefstuk')">Voeg toe aan winkelmandje</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/250x150?text=Gehakt" alt="Gehakt">
+            <h2>Gehakt</h2>
+            <p>€7,49 / kg</p>
+            <button onclick="addToCart('Gehakt')">Voeg toe aan winkelmandje</button>
+        </div>
+        <!-- Voeg hier meer producten toe -->
+    </section>
 
-  <script>
-    function addToCart(product) {
-      alert(product + " is toegevoegd aan je winkelmandje!");
-      // In de toekomst kun je hier localStorage of een echt winkelwagensysteem koppelen
-    }
-  </script>
-  <section style="padding: 1rem;">
-    <div style="border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem;">
-      <h2>Ambachtelijke Salami</h2>
-      <p>€4,50 / 200g</p>
-      <button onclick="addToCart()">Voeg toe aan winkelmandje</button>
-    </div>
-  </section>
-  <script>
-    let cartCount = 0;
-  
-    function addToCart() {
-      cartCount++;
-      document.getElementById('cart-count').textContent = cartCount;
-    }
-  </script>    
+    <footer>
+        <p>&copy; 2025 Slagerij Heyvaert</p>
+    </footer>
+
+    <script>
+        // Functie om artikelen aan het winkelmandje toe te voegen
+        function addToCart(product) {
+            alert(product + " is toegevoegd aan je winkelmandje!");
+            
+            // Haal het aantal artikelen op uit localStorage of stel het in op 0 als het niet bestaat
+            let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
+            
+            // Verhoog het aantal artikelen in de winkelwagen
+            cartCount++;
+            
+            // Sla het bijgewerkte aantal op in localStorage
+            localStorage.setItem('cartCount', cartCount);
+            
+            // Werk het aantal artikelen in de winkelwagen bij in de UI
+            updateCartCount();
+        }
+
+        // Functie om het aantal artikelen in de winkelwagen bij te werken in de interface
+        function updateCartCount() {
+            let cartCount = localStorage.getItem('cartCount') || 0;
+            document.getElementById('cart-count').textContent = cartCount;
+        }
+
+        // Zorg ervoor dat het aantal artikelen in de winkelwagen wordt weergegeven bij het laden van de pagina
+        window.onload = updateCartCount;
+    </script>    
 </body>
 </html>
