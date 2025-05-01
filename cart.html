@@ -8,10 +8,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="menu-container">
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+    <nav id="side-menu" class="hidden">
+      <a href="index.html">Home</a>
+      <a href="over-ons.html">Over ons</a>
+      <a href="communicatie.html" style="margin: 0 1rem; text-decoration: none; color: #7c2f1e; font-weight: bold;">Contact</a>
+      <a href="producten.html">Producten</a>
+      <a href="cart.html">Winkelmandje</a>
+    </nav>
+  </div>  
   <header>
     <h1>Winkelwagentje</h1>
     <nav>
-      <a href="index.html">Terug naar winkel</a>
+      <a href="producten.html">Terug naar winkel</a>
     </nav>
   </header>
 
@@ -25,69 +35,48 @@
   <footer>
     <p>&copy; 2025 Gebroeders Paridaans. Ambachtelijk en met liefde bereid.</p>
   </footer>
-
-  <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // Functie om een product volledig uit het winkelwagentje te verwijderen
-    function removeFromCart(productName) {
-      cart = cart.filter(item => item.name !== productName);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart(); // Herlaad het winkelwagentje
-    }
-
-    // Functie om de hoeveelheid van een product met 1 te verminderen
-    function removeOneFromCart(productName) {
-      const item = cart.find(p => p.name === productName);
-      if (item && item.qty > 1) {
-        item.qty -= 1;  // Verminder de hoeveelheid met 1
-      } else {
-        // Als de hoeveelheid 1 is, verwijderen we het product helemaal
-        removeFromCart(productName);
-      }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart(); // Herlaad het winkelwagentje
-    }
-
-    // Functie om het winkelwagentje weer te geven
-    function renderCart() {
-      const container = document.getElementById('cart-items');
-      const totalContainer = document.getElementById('cart-total');
-      container.innerHTML = '';
-
-      if (cart.length === 0) {
-        container.innerHTML = '<p>Je winkelwagentje is leeg.</p>';
-        totalContainer.innerText = '';
-        return;
-      }
-
-      let total = 0;
-      cart.forEach(item => {
-        const subtotal = item.price * item.qty;
-        total += subtotal;
-
-        const div = document.createElement('div');
-        div.className = 'cart-item';
-        div.innerHTML = `
-          <strong>${item.name}</strong><br>
-          Aantal: ${item.qty} &times; €${item.price.toFixed(2)} = €${subtotal.toFixed(2)}<br>
-          <button onclick="removeOneFromCart('${item.name}')">Verwijder 1</button>
-          <button onclick="removeFromCart('${item.name}')">Verwijder alles</button>
-          <hr>
-        `;
-        container.appendChild(div);
-      });
-
-      totalContainer.innerText = `Totaal: €${total.toFixed(2)}`;
-    }
-
-    if (document.readyState !== 'loading') {
-      if (document.getElementById('cart-items')) renderCart();
-    } else {
-      document.addEventListener('DOMContentLoaded', function () {
-        if (document.getElementById('cart-items')) renderCart();
-      });
-    }
-  </script>
 </body>
 </html>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("side-menu");
+    menu.classList.toggle("hidden");
+  }
+</script>
+<h2>Je winkelmandje</h2>
+<ul id="cart-items"></ul>
+<p id="total-price"></p>
+
+<script>
+  // Haal cartItems op uit localStorage en toon ze
+  window.onload = function () {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const list = document.getElementById("cart-items");
+    const totalPriceElement = document.getElementById("total-price");
+    let totalPrice = 0;
+
+    if (cartItems.length === 0) {
+      list.innerHTML = "<li>Je winkelmandje is leeg.</li>";
+      totalPriceElement.textContent = "";
+    } else {
+      // Als er producten zijn, toon ze in een lijst
+      cartItems.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - €${item.price.toFixed(2)}`;
+        list.appendChild(li);
+        totalPrice += item.price;
+      });
+
+      // Toon de totale prijs
+      totalPriceElement.textContent = `Totaal: €${totalPrice.toFixed(2)}`;
+    }
+  };
+</script>
+<button onclick="clearCart()">Winkelmandje leegmaken</button>
+
+<script>
+  function clearCart() {
+    localStorage.removeItem("cartItems");
+    location.reload(); // herlaad om lijst te verversen
+  }
+</script>

@@ -57,18 +57,19 @@ nav {
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="menu-container">
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+    <nav id="side-menu" class="hidden">
+      <a href="index.html">Home</a>
+      <a href="over-ons.html">Over ons</a>
+      <a href="contact.html">Contact</a>
+      <a href="producten.html">Producten</a>
+      <a href="cart.html">Winkelmandje</a>
+    </nav>
+  </div>
+  
   <header>
     <h1>Communicatie</h1>
-            <nav>
-              <div class="dropdown">
-                <div class="dropdown-button">Menu</div>
-                <div class="dropdown-content">
-                  <a href="index.html">Home</a>
-                  <a href="communicatie.html">Communicatie</a>
-                  <a href="over-ons.html">Over ons</a>
-                </div>
-              </div>
-            </nav>
   </header>
 
   <main>
@@ -95,3 +96,9 @@ nav {
   </footer>
 </body>
 </html>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("side-menu");
+    menu.classList.toggle("hidden");
+  }
+</script>

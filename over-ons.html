@@ -76,18 +76,18 @@ nav {
   </style>
 </head>
 <body>
+  <div class="menu-container">
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+    <nav id="side-menu" class="hidden">
+      <a href="index.html">Home</a>
+      <a href="over-ons.html">Over ons</a>
+      <a href="communicatie.html" style="margin: 0 1rem; text-decoration: none; color: #7c2f1e; font-weight: bold;">Contact</a>
+      <a href="producten.html">Producten</a>
+      <a href="cart.html">Winkelmandje</a>
+    </nav>
+  </div>  
   <header>
     <h1>Over ons</h1>
-            <nav>
-              <div class="dropdown">
-                <div class="dropdown-button">Menu</div>
-                <div class="dropdown-content">
-                  <a href="index.html">Home</a>
-                  <a href="communicatie.html">Communicatie</a>
-                  <a href="over-ons.html">Over ons</a>
-                </div>
-              </div>
-            </nav>
   </header>
 
   <main>
@@ -106,3 +106,9 @@ nav {
   </footer>
 </body>
 </html>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("side-menu");
+    menu.classList.toggle("hidden");
+  }
+</script>
