@@ -82,15 +82,14 @@
         </div>
     </header>         
     <header>
-        <h1>Onze Producten</h1>
     </header>
 
     <section class="product-list">
         <div class="product">
-            <img src="https://via.placeholder.com/250x150?text=Biefstuk" alt="Biefstuk">
+          <img src="images/biefstuk.jpg" alt="Biefstuk" class="product-image">
             <h2>Biefstuk</h2>
             <p>€12,99 / kg</p>
-            <button onclick="addToCart('Biefstuk', 12.99)">Voeg toe aan winkelmandje</button>
+            <button onclick="addToCart('Biefstuk', 12.99, 'images/biefstuk.jpg')">Voeg toe aan winkelmandje</button>
             
         </div>
         <div class="product">
@@ -107,36 +106,27 @@
     </footer>
 
     <script>
-      // Voeg een product toe aan het winkelmandje
-      function addToCart(productName, productPrice) {
+      function addToCart(name, price, image) {
         let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        
-        // Voeg het product toe met naam en prijs
-        cartItems.push({ name: productName, price: productPrice });
     
-        // Sla het winkelmandje op in localStorage
+        const existingItem = cartItems.find(item => item.name === name);
+    
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cartItems.push({ name, price, image, quantity: 1 });
+        }
+    
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    
-        // Update aantal producten in winkelwagentje
         updateCartCount();
-    
-        alert(`${productName} is toegevoegd aan je winkelmandje!`);
+        alert(`${name} is toegevoegd aan je winkelmandje!`);
       }
     
-      // Update het aantal producten in de header
       function updateCartCount() {
         const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        document.getElementById('cart-count').textContent = cartItems.length;
+        const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        document.getElementById("cart-count").textContent = total;
       }
     
-      // Menu toggle
-      function toggleMenu() {
-        const menu = document.getElementById("side-menu");
-        menu.classList.toggle("hidden");
-      }
-    
-      // Bij het laden van de pagina: toon juiste aantal in winkelwagentje
-      window.onload = function() {
-        updateCartCount();
-      };
+      window.onload = updateCartCount;
     </script>    

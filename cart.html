@@ -48,29 +48,78 @@
 <p id="total-price"></p>
 
 <script>
-  // Haal cartItems op uit localStorage en toon ze
   window.onload = function () {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     const list = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
+    list.innerHTML = "";
     let totalPrice = 0;
 
     if (cartItems.length === 0) {
       list.innerHTML = "<li>Je winkelmandje is leeg.</li>";
       totalPriceElement.textContent = "";
-    } else {
-      // Als er producten zijn, toon ze in een lijst
-      cartItems.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.name} - €${item.price.toFixed(2)}`;
-        list.appendChild(li);
-        totalPrice += item.price;
-      });
-
-      // Toon de totale prijs
-      totalPriceElement.textContent = `Totaal: €${totalPrice.toFixed(2)}`;
+      return;
     }
+
+    cartItems.forEach((item, index) => {
+      const li = document.createElement("li");
+
+      const img = document.createElement("img");
+      img.src = item.image;
+      img.alt = item.name;
+      img.style.width = "100px";
+      img.style.borderRadius = "6px";
+      img.style.marginRight = "10px";
+
+      const text = document.createElement("span");
+      const linePrice = item.price * item.quantity;
+      text.textContent = `${item.name} x${item.quantity} - €${linePrice.toFixed(2)}`;
+
+      const decreaseBtn = document.createElement("button");
+      decreaseBtn.textContent = "➖";
+      decreaseBtn.onclick = function () {
+        decreaseQuantity(index);
+      };
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "🗑";
+      removeBtn.onclick = function () {
+        removeItem(index);
+      };
+
+      li.style.display = "flex";
+      li.style.alignItems = "center";
+      li.style.gap = "1rem";
+      li.appendChild(img);
+      li.appendChild(text);
+      li.appendChild(decreaseBtn);
+      li.appendChild(removeBtn);
+
+      list.appendChild(li);
+
+      totalPrice += linePrice;
+    });
+
+    totalPriceElement.textContent = `Totaal: €${totalPrice.toFixed(2)}`;
   };
+
+  function decreaseQuantity(index) {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    if (cartItems[index].quantity > 1) {
+      cartItems[index].quantity--;
+    } else {
+      cartItems.splice(index, 1); // verwijder item volledig als hoeveelheid 1 is
+    }
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    location.reload();
+  }
+
+  function removeItem(index) {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    cartItems.splice(index, 1);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    location.reload();
+  }
 </script>
 <button onclick="clearCart()">Winkelmandje leegmaken</button>
 
